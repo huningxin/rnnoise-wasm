@@ -33,3 +33,14 @@ Example: `emcc -g -O3  -s ALLOW_MEMORY_GROWTH=1 -s EXPORT_ALL=1  -s EXTRA_EXPORT
 
 
 To optimize for worklets: `emcc -g -O3 -s BINARYEN_ASYNC_COMPILATION=0 -s SINGLE_FILE=1  -s ALLOW_MEMORY_GROWTH=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["cwrap"]' -I ../include/ ../src/*.c ../examples/*.c --post-js denoise-worklet.js -o denoise-wasm-worklet.js`
+
+# Instructions for modifying the feature demo
+
+The C++ source of the demo is included in 'Examples' directory. 
+
+To modify 
+1. Replace contents of 'rnnoise/examples' with 'rnnoise_features.c' in 'Examples' directory. 
+2. Replace contents of 'rnnoise/src/denoise.c' with 'denoise.c' in 'Examples' directory.
+3. Use emscripten to build the Web demo.
+
+Example: `emcc -g -O3  -s ALLOW_MEMORY_GROWTH=1 -s EXPORT_ALL=1  -s EXTRA_EXPORTED_RUNTIME_METHODS='["cwrap"]' -I ../include/ ../src/*.c rnnoise_features.c -o ./features_demo/wasm/rnnoise.js`
